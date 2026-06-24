@@ -136,8 +136,9 @@ def main():
     st.set_page_config(page_title="Asisten Administrasi Tutor Les", layout="wide")
     
     st.title("📚 Asisten Administrasi Mengajar & Tagihan Tutor")
-    st.write("Catat sesi les, pantau estimasi pendapatan, dan unduh laporan PDF dengan praktis.")
-    st.hr()
+st.write("Catat sesi les, pantau estimasi pendapatan, dan unduh laporan PDF dengan praktis.")
+st.divider()
+
 
     # Membagi layout menjadi 2 kolom (Kiri: Input data | Kanan: Dashboard & Riwayat)
     col1, col2 = st.columns([1, 2])
