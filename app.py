@@ -143,17 +143,17 @@ st.divider()
     # Membagi layout menjadi 2 kolom (Kiri: Input data | Kanan: Dashboard & Riwayat)
 col1, col2 = st.columns([1, 2])
 
-    with col1:
-        st.header("📝 Catat Sesi Baru")
-        with st.form("form_sesi", clear_on_submit=True):
-            tgl = st.date_input("Tanggal Sesi", datetime.now())
-            waktu = st.time_input("Waktu Sesi", datetime.now().time())
-            nama_siswa = st.text_input("Nama Siswa", placeholder="Contoh: Rian")
-            materi = st.text_input("Materi Pembelajaran", placeholder="Contoh: Aljabar Dasar")
-            durasi = st.number_input("Durasi Sesi (Dalam Jam)", min_value=0.5, max_value=8.0, step=0.5, value=1.5)
-            tarif = st.number_input("Tarif Mengajar per Jam (Rp)", min_value=10000, step=5000, value=100000)
+with col1:
+    st.header("📝 Catat Sesi Baru")
+with st.form("form_sesi", clear_on_submit=True):
+    tgl = st.date_input("Tanggal Sesi", datetime.now())
+    waktu = st.time_input("Waktu Sesi", datetime.now().time())
+    nama_siswa = st.text_input("Nama Siswa", placeholder="Contoh: Rian")
+    materi = st.text_input("Materi Pembelajaran", placeholder="Contoh: Aljabar Dasar")
+    durasi = st.number_input("Durasi Sesi (Dalam Jam)", min_value=0.5, max_value=8.0, step=0.5, value=1.5)
+    tarif = st.number_input("Tarif Mengajar per Jam (Rp)", min_value=10000, step=5000, value=100000)
             
-            submit_btn = st.form_submit_button("Simpan Sesi")
+    submit_btn = st.form_submit_button("Simpan Sesi")
             
             if submit_btn:
                 if nama_siswa and materi:
