@@ -155,41 +155,40 @@ with st.form("form_sesi", clear_on_submit=True):
             
     submit_btn = st.form_submit_button("Simpan Sesi")
             
-            if submit_btn:
-                if nama_siswa and materi:
-                    gabung_tgl_waktu = f"{tgl.strftime('%d %b %Y')}, {waktu.strftime('%H:%M')}"
-                    tambah_sesi(gabung_tgl_waktu, nama_siswa, materi, durasi, tarif)
-                    st.success("Sesi berhasil direkam tanpa tercecer!")
-                    st.rerun()
-                else:
-                    st.error("Mohon isi nama siswa dan materi terlebih dahulu.")
+if submit_btn:
+if nama_siswa and materi:
+     gabung_tgl_waktu = f"{tgl.strftime('%d %b %Y')}, {waktu.strftime('%H:%M')}"
+     tambah_sesi(gabung_tgl_waktu, nama_siswa, materi, durasi, tarif)
+     st.success("Sesi berhasil direkam tanpa tercecer!")
+     st.rerun()
+       else:
+     st.error("Mohon isi nama siswa dan materi terlebih dahulu.")
 
-    with col2:
-        df_sesi = ambil_semua_sesi()
-        
-        # --- BLOK ESTIMASI & RINGKASAN ---
-        st.header("📊 Dashboard Ringkasan & Estimasi")
-        if not df_sesi.empty:
-            total_jam = df_sesi['durasi'].sum()
-            total_tagihan = df_sesi['tagihan'].sum()
-            belum_bayar = df_sesi[df_sesi['status_bayar'] == 'Belum Dibayar']['tagihan'].sum()
+with col2:
+     df_sesi = ambil_semua_sesi()
+
+# --- BLOK ESTIMASI & RINGKASAN ---
+st.header("📊 Dashboard Ringkasan & Estimasi")
+if not df_sesi.empty:
+     total_jam = df_sesi['durasi'].sum()
+     total_tagihan = df_sesi['tagihan'].sum()
+     belum_bayar = df_sesi[df_sesi['status_bayar'] == 'Belum Dibayar']['tagihan'].sum()
             
-            c_jam, c_tagihan, c_belum = st.columns(3)
-            c_jam.metric("Total Jam Mengajar", f"{total_jam} Jam")
-            c_tagihan.metric("Total Akumulasi Tagihan", f"Rp {total_tagihan:,.0f}")
-            c_belum.metric("Estimasi Belum Dibayar", f"Rp {belum_bayar:,.0f}")
-            
-            # --- TOMBOL UNDUH PDF ---
-            st.subheader("📄 Ekspor Administrasi")
-            try:
-                pdf_data = generate_pdf_report(df_sesi, total_jam, total_tagihan)
-                st.download_button(
-                    label="📥 Unduh Laporan Riwayat & Tagihan (PDF)",
-                    data=pdf_data,
-                    file_name=f"Laporan_Les_{datetime.now().strftime('%Y%m%d')}.pdf",
-                    mime="application/pdf"
+    c_jam, c_tagihan, c_belum = st.columns(3)
+    c_jam.metric("Total Jam Mengajar", f"{total_jam} Jam")
+    c_tagihan.metric("Total Akumulasi Tagihan", f"Rp {total_tagihan:,.0f}")
+    c_belum.metric("Estimasi Belum Dibayar", f"Rp {belum_bayar:,.0f}")
+# --- TOMBOL UNDUH PDF ---
+    st.subheader("📄 Ekspor Administrasi")
+     try:
+    pdf_data = generate_pdf_report(df_sesi, total_jam, total_tagihan)
+       st.download_button(
+       label="📥 Unduh Laporan Riwayat & Tagihan (PDF)",
+       data=pdf_data,
+       file_name=f"Laporan_Les_{datetime.now().strftime('%Y%m%d')}.pdf",
+       mime="application/pdf"
                 )
-            except Exception as e:
+    except Exception as e:
                 st.info("Tombol PDF siap digunakan setelah library 'weasyprint' terpasang.")
         else:
             st.info("Belum ada data sesi mengajar yang terekam.")
