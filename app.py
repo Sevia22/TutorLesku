@@ -178,29 +178,29 @@ if not df_sesi.empty:
      c_tagihan.metric("Total Akumulasi Tagihan", f"Rp {total_tagihan:,.0f}")
      c_belum.metric("Estimasi Belum Dibayar", f"Rp {belum_bayar:,.0f}")
 # --- TOMBOL UNDUH PDF ---
-    st.subheader("📄 Ekspor Administrasi")
-     try:
-    pdf_data = generate_pdf_report(df_sesi, total_jam, total_tagihan)
-       st.download_button(
-       label="📥 Unduh Laporan Riwayat & Tagihan (PDF)",
-       data=pdf_data,
-       file_name=f"Laporan_Les_{datetime.now().strftime('%Y%m%d')}.pdf",
-       mime="application/pdf"
+     st.subheader("📄 Ekspor Administrasi")
+try:
+     pdf_data = generate_pdf_report(df_sesi, total_jam, total_tagihan)
+     st.download_button(
+     label="📥 Unduh Laporan Riwayat & Tagihan (PDF)",
+     data=pdf_data,
+     file_name=f"Laporan_Les_{datetime.now().strftime('%Y%m%d')}.pdf",
+     mime="application/pdf"
                 )
-    except Exception as e:
-                st.info("Tombol PDF siap digunakan setelah library 'weasyprint' terpasang.")
-        else:
-            st.info("Belum ada data sesi mengajar yang terekam.")
-
-        # --- TABEL RIWAYAT SESI ---
-        st.header("📜 Riwayat Sesi Mengajar")
-        if not df_sesi.empty:
-            # Mempercantik tampilan dataframe di browser
-            display_df = df_sesi.copy()
-            st.dataframe(
-                display_df[['tanggal', 'nama_siswa', 'materi', 'durasi', 'tagihan', 'status_bayar']],
-                column_config={
-                    "tanggal": "Tanggal & Waktu",
+except Exception as e:
+     st.info("Tombol PDF siap digunakan setelah library 'weasyprint' terpasang.")
+else:
+     st.info("Belum ada data sesi mengajar yang terekam.")
+    
+# --- TABEL RIWAYAT SESI ---
+     st.header("📜 Riwayat Sesi Mengajar")
+if not df_sesi.empty:
+     # Mempercantik tampilan dataframe di browser
+     display_df = df_sesi.copy()
+     st.dataframe(
+     display_df[['tanggal', 'nama_siswa', 'materi', 'durasi', 'tagihan', 'status_bayar']],
+     column_config={
+     "tanggal": "Tanggal & Waktu",
                     "nama_siswa": "Siswa",
                     "materi": "Materi",
                     "durasi": st.column_config.NumberColumn("Durasi", format="%.1f Jam"),
