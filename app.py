@@ -141,7 +141,7 @@ st.divider()
 
 
     # Membagi layout menjadi 2 kolom (Kiri: Input data | Kanan: Dashboard & Riwayat)
-    col1, col2 = st.columns([1, 2])
+col1, col2 = st.columns([1, 2])
 
     with col1:
         st.header("📝 Catat Sesi Baru")
