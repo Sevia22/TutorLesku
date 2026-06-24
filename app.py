@@ -161,7 +161,7 @@ if submit_btn:
          tambah_sesi(gabung_tgl_waktu, nama_siswa, materi, durasi, tarif)
          st.success("Sesi berhasil direkam tanpa tercecer!")
          st.rerun()
-               else:
+         else:
          st.error("Mohon isi nama siswa dan materi terlebih dahulu.")
 
 with col2:
