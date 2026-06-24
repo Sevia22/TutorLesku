@@ -173,11 +173,10 @@ if not df_sesi.empty:
      total_jam = df_sesi['durasi'].sum()
      total_tagihan = df_sesi['tagihan'].sum()
      belum_bayar = df_sesi[df_sesi['status_bayar'] == 'Belum Dibayar']['tagihan'].sum()
-            
-    c_jam, c_tagihan, c_belum = st.columns(3)
-    c_jam.metric("Total Jam Mengajar", f"{total_jam} Jam")
-    c_tagihan.metric("Total Akumulasi Tagihan", f"Rp {total_tagihan:,.0f}")
-    c_belum.metric("Estimasi Belum Dibayar", f"Rp {belum_bayar:,.0f}")
+     c_jam, c_tagihan, c_belum = st.columns(3)
+     c_jam.metric("Total Jam Mengajar", f"{total_jam} Jam")
+     c_tagihan.metric("Total Akumulasi Tagihan", f"Rp {total_tagihan:,.0f}")
+     c_belum.metric("Estimasi Belum Dibayar", f"Rp {belum_bayar:,.0f}")
 # --- TOMBOL UNDUH PDF ---
     st.subheader("📄 Ekspor Administrasi")
      try:
