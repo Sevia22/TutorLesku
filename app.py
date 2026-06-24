@@ -215,9 +215,9 @@ if not df_sesi.empty:
      pilih_id = st.selectbox("Pilih ID Sesi untuk diubah:", df_sesi['id'].tolist())
      status_baru = st.radio("Status Baru:", ["Belum Dibayar", "Lunas Dibayar"], horizontal=True)
      if st.button("Perbarui Status"):
-     update_status_bayar(pilih_id, status_baru)
-     st.success(f"Status Sesi ID {pilih_id} berhasil diupdate!")
-     st.rerun()
+         update_status_bayar(pilih_id, status_baru)
+         st.success(f"Status Sesi ID {pilih_id} berhasil diupdate!")
+         st.rerun()
 
 if __name__ == '__main__':
     main()
